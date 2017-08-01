@@ -7,6 +7,7 @@ import io.arivera.oss.embedded.rabbitmq.EmbeddedRabbitMqConfig;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +35,11 @@ public class EmbeddedRabbitMqTest {
 	
 	@Before
 	public void before() {
-		EmbeddedRabbitMqConfig config = new EmbeddedRabbitMqConfig.Builder().build();
+		EmbeddedRabbitMqConfig config = new EmbeddedRabbitMqConfig.Builder().
+				rabbitMqServerInitializationTimeoutInMillis(TimeUnit.SECONDS.toMillis(60*5))
+		        .defaultRabbitMqCtlTimeoutInMillis(TimeUnit.SECONDS.toMillis(60*5))
+		        .erlangCheckTimeoutInMillis(TimeUnit.SECONDS.toMillis(60))
+				.build();
 		rabbitMq = new EmbeddedRabbitMq(config);
 		rabbitMq.start();
 		
