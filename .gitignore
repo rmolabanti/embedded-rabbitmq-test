@@ -21,7 +21,6 @@ hs_err_pid*
 .metadata
 .gradle
 classes/
-bin/
 tmp/
 *.tmp
 *.bak
